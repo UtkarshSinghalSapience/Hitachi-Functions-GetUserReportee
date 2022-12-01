@@ -18,13 +18,14 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
     let graphService = new GraphService(secretValues.TenantId,secretValues.MicrosoftAPPId,secretValues.MicrosoftAPPPassword);
 
     let listreportee = await graphService.GetUserReportee(emailId);
-    if(listreportee == null)
-        listreportee = ["Invalid user."];
+    let isUserValid = false;
+    if(listreportee.length > 0)
+      isUserValid = true;
 
     console.log(listreportee);
     context.res = {
         status: 200, /* Defaults to 200 */
-        body: listreportee,
+        body: {listreportee,isUserValid},
         headers: {
             'Content-Type': 'application/json'
         }
