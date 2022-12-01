@@ -37,6 +37,7 @@ export class GraphService{
         }
         catch(err){
             console.log(err);
+            return [];
         }
     }
 

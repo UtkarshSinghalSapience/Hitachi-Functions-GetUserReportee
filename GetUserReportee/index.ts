@@ -19,7 +19,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
 
     let listreportee = await graphService.GetUserReportee(emailId);
     let isUserValid = false;
-    if(listreportee.length > 0)
+    if(listreportee && listreportee.length > 0)
       isUserValid = true;
 
     console.log(listreportee);
